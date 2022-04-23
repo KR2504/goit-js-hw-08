@@ -4,9 +4,9 @@ const iframe = document.querySelector('iframe');
 const player = new Vimeo.Player(iframe);
 const LOCALSTORAGE_KEY = "videoplayer-current-time";
 
-const throttleOnVideoPlayerTime = throttle(savePlaybackTime, 1000);
+const OnThrottleVideoPlayerTime = throttle(savePlaybackTime, 1000);
 
-player.on('timeupdate', throttleOnVideoPlayerTime);
+player.on('timeupdate', OnThrottleVideoPlayerTime);
 
 function savePlaybackTime(currentTime) {
     const currentTimeJSON = JSON.stringify(currentTime.seconds)
@@ -14,9 +14,10 @@ function savePlaybackTime(currentTime) {
 }
 
 function setCurrentTime() {
-    const getTIme = localStorage.getItem(LOCALSTORAGE_KEY);
+    const getCurrentTime = localStorage.getItem(LOCALSTORAGE_KEY);
+    const parsedCurrentTime = JSON.parse(getCurrentTime)
 
-    player.setCurrentTime(getTIme);
+    player.setCurrentTime(parsedCurrentTime)
 }
 
 setCurrentTime();
