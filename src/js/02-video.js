@@ -12,15 +12,15 @@ function savePlaybackTime(currentTime) {
     const currentTimeJSON = JSON.stringify(currentTime.seconds)
     localStorage.setItem(LOCALSTORAGE_KEY, currentTimeJSON);
 }
+setCurrentTime();
 
 function setCurrentTime() {
     const getCurrentTime = localStorage.getItem(LOCALSTORAGE_KEY);
-    const parsedCurrentTime = JSON.parse(getCurrentTime)
-
-    player.setCurrentTime(parsedCurrentTime)
+    if (getCurrentTime) {
+        const parsedCurrentTime = JSON.parse(getCurrentTime)
+        player.setCurrentTime(parsedCurrentTime)
+    }
 }
-
-setCurrentTime();
 
 player.getVideoTitle().then(function(title) {
     console.log('title:', title);
