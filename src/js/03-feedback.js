@@ -35,15 +35,13 @@ function handleSubmit(e) {
         elements: { email, message }
     } = e.currentTarget;
 
-    if (email === '' || message === '') {
-        return;
-    }
-
     const dataObject = {
         email: email.value,
         message: message.value,
     }
-
+    if (email.value === '' || message.value === '') {
+        return;
+    }
 
     console.log(dataObject);
     localStorage.clear();
